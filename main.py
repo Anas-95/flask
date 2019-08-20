@@ -20,7 +20,7 @@ def index():
 
 @app.route('/restaurantMenu/<int:restaurant_id>/create', methods=['GET', 'POST'])
 def create(restaurant_id):
-    restaurant = session.query(Restaurant).filter_by(id=restaurant_id)
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
 
     if request.method == 'POST':
         new_item = MenuItem(name=request.form['name'], restaurant_id=restaurant_id)
@@ -34,22 +34,22 @@ def create(restaurant_id):
 
 @app.route('/restaurantMenu/<int:restaurant_id>/<int:item_id>/read')
 def read(restaurant_id, item_id):
-    restaurant = session.query(Restaurant).filter_by(id=restaurant_id)
-    item = session.query(MenuItem).filter_by(item_id=item_id)
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    item = session.query(MenuItem).filter_by(id=item_id).one()
     return render_template("/restaurant/menu/read.html", restaurant=restaurant, item=item)
 
 
 @app.route('/restaurantMenu/<int:restaurant_id>/read')
 def read_restaurant(restaurant_id):
-    restaurant = session.query(Restaurant).filter_by(id=restaurant_id)
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id)
     return render_template("/restaurant/read.html", restaurant=restaurant, items=items)
 
 
 @app.route('/restaurantMenu/<int:restaurant_id>/<int:item_id>/update', methods=['GET', 'POST'])
 def update(restaurant_id, item_id):
-    restaurant = session.query(Restaurant).filter_by(id=restaurant_id)
-    item = session.query(MenuItem).filter_by(id=item_id)
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    item = session.query(MenuItem).filter_by(id=item_id).one()
 
     if request.method == 'POST':
         item.name = request.form['name']
@@ -63,8 +63,8 @@ def update(restaurant_id, item_id):
 
 @app.route('/restaurantMenu/<int:restaurant_id>/<int:item_id>/delete', methods=['GET', 'POST'])
 def delete(restaurant_id, item_id):
-    restaurant = session.query(Restaurant).filter_by(id=restaurant_id)
-    item = session.query(MenuItem).filter_by(id=item_id)
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    item = session.query(MenuItem).filter_by(id=item_id).one()
 
     if request.method == 'POST':
         session.delete(item)
@@ -76,7 +76,7 @@ def delete(restaurant_id, item_id):
 
 
 def main():
-    # app.secret_key = "It is a secret."
+    app.secret_key = "It is a secret."
     app.debug = True
     app.run(host='0.0.0.0', port=8080)
 

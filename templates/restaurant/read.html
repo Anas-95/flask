@@ -16,8 +16,8 @@
             </ul>
         {% endif %}
     {% endwith %}
-    <script> alert({{restaurant.id}})</script>
-<!--    <a href="{{ url_for('create', restaurant_id=restaurant.id) }}">New Menu Item</a>-->
+
+    <a href="{{ url_for('create', restaurant_id=restaurant.id) }}">New Menu Item</a>
 
     {% for item in items %}
         <div>
@@ -27,8 +27,8 @@
 
             <p> {{ item.price }} </p>
 
-<!--            <a href="{{ url_for('update', restaurant_id=restaurant.id, item_id=item.id) }}">Edit</a>-->
-<!--            <a href="{{ url_for('delete', restaurant_id=restaurant.id, item_id=item.id) }}">Delete</a>-->
+            <a href="{{ url_for('update', restaurant_id=restaurant.id, item_id=item.id) }}">Edit</a>
+            <a href="{{ url_for('delete', restaurant_id=restaurant.id, item_id=item.id) }}">Delete</a>
         </div>
     {% endfor %}
 
