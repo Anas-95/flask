@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>Delete {{restaurant.name}} Item</title>
+
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <form action="{{ url_for('delete', restaurant_id=restaurant.id, item_id=item.id) }}" method="post">
+    <form action="{{ url_for('delete_item', restaurant_id=restaurant.id, item_id=item.id) }}" method="post">
         <label for="name">Name: </label>
         <p id="name">{{item.name}}</p>
         <input type="submit" value="Delete">

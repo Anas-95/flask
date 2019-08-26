@@ -1,9 +1,10 @@
 .git
 .idea
 .vagrant
-ubuntu-xenial-16.04-cloudimg-console.log
+*.log
 Vagrantfile
 venv
 __pycache__
 __pycache__/*
 *.pyc
+*.db
